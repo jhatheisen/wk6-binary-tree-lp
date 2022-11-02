@@ -361,6 +361,7 @@ describe('Binary Tree Practice', () => {
 
     it('returns the in-order predecessor of the target node', function() {
       expect(inOrderPredecessor(bstRoot, 4)).to.equal(3);
+      console.log(inOrderPredecessor(bstRootUnbalanced, 6))
       expect(inOrderPredecessor(bstRootUnbalanced, 6)).to.equal(5);
       expect(inOrderPredecessor(bstRootBig, 5)).to.equal(4);
       expect(inOrderPredecessor(bstRootBig, 10)).to.equal(8);

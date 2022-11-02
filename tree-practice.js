@@ -129,11 +129,11 @@ function getParentNode (rootNode, target) {
   // Your code here
   if (rootNode.val === target) return null
   const queue = [rootNode];
-  
+
 
   while (queue.length > 0) {
     let node = queue.pop();
-    
+
     if (node.left) {
       if (node.left.val === target) return node;
       queue.push(node.left);
@@ -146,27 +146,44 @@ function getParentNode (rootNode, target) {
 return undefined;
 }
 
-function inOrderPredecessor (rootNode, target) {
-  // Your code here
-  let current = rootNode;
-  let stack = [];
-  let predecessor = null;
+let order = [];
 
-  while (true) {
-    if (current) {stack.push(current);
-    current = current.left;
-    } else if (!current && stack.length) {
-      current = stack.pop();
-      if (current.val === target) {
-        if (!predecessor) return null;
-        return predecessor.val;
+function inOrderPredecessor (rootNode, target) {
+  let currentNode = rootNode;
+  // console.log(target);
+  if (!currentNode) return this;
+      if (currentNode) {
+        inOrderPredecessor(currentNode.left, target);
+        // console.log('currval :',currentNode.val);
+        // console.log('target :',target);
+        // console.log(currentNode.val === target);
+        // console.log('curr order :',order);
+        // console.log('last val :', order[order.length - 1], typeof order[order.length - 1])
+        if (currentNode.val === target) return order[order.length - 1];
+        order.push(currentNode.val);
+        inOrderPredecessor(currentNode.right, target);
       }
-      predecessor = current;
-      current = current.right;
-    } else break;
-  } 
+  return null;
 }
 
+// let current = rootNode;
+// let stack = [];
+// let predecessor = null;
+// while (true) {
+//   console.log(rootNode, stack, predecessor);
+//   if (current) {
+//     stack.push(current);
+//     current = current.left;
+//   } else if (!current && stack.length) {
+//     current = stack.pop();
+//     if (current.val === target) {
+//       if (!predecessor) return null;
+//       return predecessor.val;
+//     }
+//     predecessor = current;
+//     current = current.right;
+//   } else break;
+// }
 
   // let arr = [];
   // if (!rootNode) return null;
@@ -182,9 +199,10 @@ function inOrderPredecessor (rootNode, target) {
   //   inOrderPredecessor(rootNode.right);
   //   }
   // return null
+
 // inOrderPredecessor(bstRoot, 4)
 function deleteNodeBST(rootNode, target) {
-  // Do a traversal to find the node. Keep track of the parent
+  // Do a prinOrderPredecessor to find the node. Keep track of the parent
 
   // Undefined if the target cannot be found
 
