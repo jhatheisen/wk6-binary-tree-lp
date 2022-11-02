@@ -148,20 +148,40 @@ return undefined;
 
 function inOrderPredecessor (rootNode, target) {
   // Your code here
-  if (!rootNode) return this
-  if (rootNode) {
-    if (rootNode.left) {
-      if (rootNode.left.val === target) return rootNode;
-    }
-    inOrderPredecessor(rootNode.left);
-    console.log(rootNode.val);
-    if (rootNode.right) {
-          if (rootNode.right.val === target) return rootNode;
+  let current = rootNode;
+  let stack = [];
+  let predecessor = null;
+
+  while (true) {
+    if (current) {stack.push(current);
+    current = current.left;
+    } else if (!current && stack.length) {
+      current = stack.pop();
+      if (current.val === target) {
+        if (!predecessor) return null;
+        return predecessor.val;
       }
-        inOrderPredecessor(rootNode.right);
-      }
-      return undefined
+      predecessor = current;
+      current = current.right;
+    } else break;
+  } 
 }
+
+
+  // let arr = [];
+  // if (!rootNode) return null;
+  // if (rootNode) {
+  //   if (rootNode.left) {
+  //     if (rootNode.left.val === target) return rootNode;
+  //   }
+  //   if (rootNode.right) {
+  //     if (rootNode.right.val === target) return rootNode;
+  //   }
+  //   inOrderPredecessor(rootNode.left);
+  //   console.log(rootNode.val);
+  //   inOrderPredecessor(rootNode.right);
+  //   }
+  // return null
 // inOrderPredecessor(bstRoot, 4)
 function deleteNodeBST(rootNode, target) {
   // Do a traversal to find the node. Keep track of the parent
