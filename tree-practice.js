@@ -127,12 +127,42 @@ function countNodes (rootNode) {
 
 function getParentNode (rootNode, target) {
   // Your code here
+  if (rootNode.val === target) return null
+  const queue = [rootNode];
+  
+
+  while (queue.length > 0) {
+    let node = queue.pop();
+    
+    if (node.left) {
+      if (node.left.val === target) return node;
+      queue.push(node.left);
+    }
+    if (node.right) {
+      if (node.right.val === target) return node;
+      queue.push(node.right);
+  }
+}
+return undefined;
 }
 
 function inOrderPredecessor (rootNode, target) {
   // Your code here
+  if (!rootNode) return this
+  if (rootNode) {
+    if (rootNode.left) {
+      if (rootNode.left.val === target) return rootNode;
+    }
+    inOrderPredecessor(rootNode.left);
+    console.log(rootNode.val);
+    if (rootNode.right) {
+          if (rootNode.right.val === target) return rootNode;
+      }
+        inOrderPredecessor(rootNode.right);
+      }
+      return undefined
 }
-
+// inOrderPredecessor(bstRoot, 4)
 function deleteNodeBST(rootNode, target) {
   // Do a traversal to find the node. Keep track of the parent
 
