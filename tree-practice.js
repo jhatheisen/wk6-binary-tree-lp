@@ -6,19 +6,58 @@ const { BinarySearchTree, TreeNode } = require('./binary-search-tree.js');
 
 function findMinBST (rootNode) {
   // Your code here
+  let currentNode = rootNode;
+  
+  while (currentNode.left) {
+    currentNode = currentNode.left;
+  }
+  return currentNode.val
 }
 
 function findMaxBST (rootNode) {
   // Your code here
+  let currentNode = rootNode;
+
+  while (currentNode.right) {
+    currentNode = currentNode.right;
+  }
+  return currentNode.val;
 }
 
 function findMinBT (rootNode) {
   // Your code here
+  let minVal = Infinity;
+
+  const queue = [];
+      queue.push(rootNode)
+  
+      while (queue.length > 0) {
+        let node = queue.pop();
+        if (node.val < minVal) minVal = node.val;
+  
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+      return minVal;
 }
 
 function findMaxBT (rootNode) {
   // Your code here
+  let maxVal = -Infinity;
+
+  const queue = [];
+      queue.push(rootNode)
+  
+      while (queue.length > 0) {
+        let node = queue.pop();
+        if (node.val > maxVal) maxVal = node.val;
+  
+        if (node.left) queue.push(node.left);
+        if (node.right) queue.push(node.right);
+      }
+      return maxVal;
 }
+
 
 function getHeight (rootNode) {
   // Your code here
